@@ -15,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
     AudioManager audioManager;
     int MAX_VOLUME;
     Toast toast;
+    private final static int SKIP_RANGE = 10000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +62,24 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     volumeDown(v);
+                }
+            });
+        }
+        view = findViewById(R.id.forward_button);
+        if (view != null){
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    forward(v);
+                }
+            });
+        }
+        view = findViewById(R.id.backward_button);
+        if (view!=null){
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    backward(v);
                 }
             });
         }
@@ -119,5 +138,30 @@ public class MainActivity extends AppCompatActivity {
             current_volume = 0;
         }
         setVolume(current_volume,"Volume DOWN");
+    }
+
+    private void seekTo(int currentPosition, String message){
+        mediaPlayer.seekTo(currentPosition);
+        messageShow(message + currentPosition/1000 + "s.");
+
+    }
+    protected void forward(View view){
+        int duration = mediaPlayer.getDuration();
+        int currentPosition = mediaPlayer.getCurrentPosition();
+        currentPosition+=SKIP_RANGE;
+        if (currentPosition>duration){
+            currentPosition=duration;
+        }
+        seekTo(currentPosition,"Forward to :");
+    }
+
+    protected void backward(View view){
+        int duration = mediaPlayer.getDuration();
+        int currentPosition = mediaPlayer.getCurrentPosition();
+        currentPosition-=SKIP_RANGE;
+        if (currentPosition<0){
+            currentPosition=0;
+        }
+        seekTo(currentPosition,"Backward to:");
     }
 }

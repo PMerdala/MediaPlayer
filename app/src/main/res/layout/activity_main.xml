@@ -4,41 +4,58 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="com.example.pmerdala.musicplayer.MainActivity"
     android:layout_marginLeft="16dp"
-    android:layout_marginTop="16dp">
+    android:layout_marginTop="16dp"
+    android:orientation="vertical"
+    tools:context="com.example.pmerdala.musicplayer.MainActivity">
 
     <Button
         android:id="@+id/play_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Play"
-        android:layout_marginBottom="8dp"/>
+        android:layout_marginBottom="8dp"
+        android:text="Play" />
 
     <Button
         android:id="@+id/pause_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Pause"
-        android:layout_marginBottom="16dp"/>
+        android:layout_marginBottom="16dp"
+        android:text="Pause" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp">
 
-    <Button
-        android:id="@+id/volume_up_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Volume +"
-        />
-    <Button
-        android:id="@+id/volume_down_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Volume -"
-        />
+        <Button
+            android:id="@+id/volume_down_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Volume -" />
+
+        <Button
+            android:id="@+id/volume_up_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Volume +" />
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp">
+
+        <Button
+            android:id="@+id/backward_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/backward_symbol" />
+
+        <Button
+            android:id="@+id/forward_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/forward_symbol" />
+    </LinearLayout>
 </LinearLayout>

@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Music Player</string>
+    <string name="forward_symbol">&gt;&gt;</string>
+    <string name="backward_symbol">&lt;&lt;</string>
 </resources>
