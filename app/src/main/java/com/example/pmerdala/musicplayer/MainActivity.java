@@ -22,10 +22,19 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         addListener();
+        makeMediaPlaer();
+    }
+
+    private void makeMediaPlaer(){
         mediaPlayer = MediaPlayer.create(this, R.raw.music);
         audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
         MAX_VOLUME = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
-
+        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                messageShow("Done");
+            }
+        });
     }
 
     private void addListener() {
@@ -140,9 +149,9 @@ public class MainActivity extends AppCompatActivity {
         setVolume(current_volume,"Volume DOWN");
     }
 
-    private void seekTo(int currentPosition, String message){
+    private void seekTo(int currentPosition, int duration, String message){
         mediaPlayer.seekTo(currentPosition);
-        messageShow(message + currentPosition/1000 + "s.");
+        messageShow(message + currentPosition/1000 + "s/" + duration/1000 + "s.");
 
     }
     protected void forward(View view){
@@ -150,9 +159,9 @@ public class MainActivity extends AppCompatActivity {
         int currentPosition = mediaPlayer.getCurrentPosition();
         currentPosition+=SKIP_RANGE;
         if (currentPosition>duration){
-            currentPosition=duration;
+            currentPosition=0;
         }
-        seekTo(currentPosition,"Forward to :");
+        seekTo(currentPosition,duration,"Forward to :");
     }
 
     protected void backward(View view){
@@ -160,8 +169,11 @@ public class MainActivity extends AppCompatActivity {
         int currentPosition = mediaPlayer.getCurrentPosition();
         currentPosition-=SKIP_RANGE;
         if (currentPosition<0){
-            currentPosition=0;
+            if (duration>SKIP_RANGE)
+                currentPosition=duration-SKIP_RANGE;
+            else
+                currentPosition=duration;
         }
-        seekTo(currentPosition,"Backward to:");
+        seekTo(currentPosition,duration,"Backward to:");
     }
 }
